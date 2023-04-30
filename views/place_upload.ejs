@@ -1,0 +1,53 @@
+<%- include('header') -%>
+
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>Upload a Place</h2>
+    </div>
+
+    
+        <div class="col-md-12 order-md-1">
+            <form action="/place_upload" method="POST" class="needs-validation" id = "form" >
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="placeName">Place Name</label>
+                        <input type="text" class="form-control" id="placeName" placeholder="" value="" required name = "site_name">
+                        <div class="invalid-feedback">
+                            Valid place name is required.
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                        <label for="placeName">district</label>
+                        <input type="text" class="form-control" id="district" placeholder="" value="" required name = "district">
+                        <div class="invalid-feedback">
+                            Valid district name is required.
+                        </div>
+                    </div>
+
+            
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="description">Describe</label>
+                    <textarea class="form-control" id="description" placeholder="" value="" rows="14" required name = "description"> </textarea>
+                    <div class="invalid-feedback">
+                        Description is required.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="picture">Upload Pictures:</label>
+                    <input type="file" class="img-upload-btn" multiple id="picture" name = "picture">
+                </div>
+
+                <hr class="mb-4">
+                <div id = "map"></div>
+
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Post</button>
+            </form>
+        </div>
+    </div>
+
+    <%- include('footer') -%>

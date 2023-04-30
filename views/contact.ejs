@@ -1,0 +1,46 @@
+<%- include('header') -%>
+
+<div class="container">
+    <div class="py-5 text-center">
+        
+        <h2>Send us a Message</h2>
+    
+    </div>
+
+    
+        <div class="col-md-12 order-md-1">
+            <form action="/contact_us" method="POST" class="needs-validation">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="placeName">Name</label>
+                        <input type="text" class="form-control" id="placeName" placeholder="" value="" name = "name" required>
+                        <div class="invalid-feedback">
+                            Enter your name.
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="mb-3">
+                    <label for="email">Email <span class="text-muted"></span></label>
+                    <input type="email" class="form-control" id="email" name = "email" placeholder="you@example.com">
+                    <div class="invalid-feedback">
+                        Please enter a valid email address
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description">Your Message</label>
+                    <textarea class="form-control" id="description" placeholder="" value="" rows="7" name = "message" required> </textarea>
+                    <div class="invalid-feedback">
+                        Description is required.
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+<%- include('footer') -%>

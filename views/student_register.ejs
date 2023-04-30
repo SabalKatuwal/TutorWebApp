@@ -1,0 +1,147 @@
+
+<% if(typeof message != 'undefined') { %>
+    <% message.forEach(function(error) { %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <%= message.msg %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+    <% }) %>
+<% } %>
+
+
+
+
+<%- include("header") -%>
+
+<% if(typeof alert != 'undefined') { %>
+    <% alert.forEach(function(error) { %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <%= error.msg %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+    <% }) %>
+<% } %>
+
+<div class="container">
+    <div class="py-5 text-center">
+        
+        <h2>Become a User</h2>
+        <p class="lead">Please fill out the form below.</p>
+    </div>
+
+    
+        <div class="col-md-12 order-md-1">
+            <h4 class="mb-3">Basic Information</h4>
+            <form action= "/auth/student_register" method = "POST" class="needs-validation" >
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">First name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="" value="" name="firstname" required>
+                        <div class="invalid-feedback">
+                            Valid first name is required.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName">Last name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="" value="" name="lastname" required>
+                        <div class="invalid-feedback">
+                            Valid last name is required.
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="mb-3">
+                    <label for="username">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@</span>
+                        </div>
+                        <input type="text" class="form-control" id="username" placeholder="Username" name="username"required>
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Your username is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email">Email </label>
+                    <input type="email" class="form-control" id="email" placeholder="you@example.com" name="email" >
+                    <div class="invalid-feedback">
+                        Please enter a valid email address
+                    </div>
+                </div>
+            
+                <div class="mb-3">
+                    <label for="username">Password</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="password" placeholder="password" name="password" required>
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Your password is required.
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="mb-3">
+                    <label for="username">Confirm Password</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="password" placeholder="password" name="passwordConfirm" required>
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Your password confirmation is required.
+                        </div>
+                    </div>
+                </div>
+            
+                
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+            </form>
+
+        </div>
+    </div>
+
+<%- include('footer') -%>
+
+
+
+
+<!-- 
+<form action= "/auth/tourist_register" method ="POST" >
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name ="username" required>
+    </div>
+
+    <div class="form-group">
+        <label for="fname">First Name</label>
+        <input type="text" class="form-control" id="fname" name = "firstname" required>
+    </div>
+
+    <div class="form-group">
+        <label for="lname">Last Name</label>
+        <input type="text" class="form-control" id="lname" name = "lastname" required>
+    </div>
+
+    <div class="form-group">
+        <label for="email">email</label>
+        <input type="text" class="form-control" id="email" name = "email" required>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name = "password" required>
+    </div>
+
+    <div class="form-group">
+        <label for="passwordConfirm">Confirm Password</label>
+        <input type="password" class="form-control" id="passwordConfirm" name = "passwordConfirm" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register User</button>
+
+</form> -->
+   
+

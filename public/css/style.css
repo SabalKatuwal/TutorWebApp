@@ -1,0 +1,316 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-family: 'Poppins', sans-serif; */
+}
+
+/* Navbar CSS */
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 8vh;
+  font-family: "Poppins", sans-serif;
+  /* background-color: #5D4954; */
+  background-color: #495371;
+}
+
+nav .logo {
+  color: rgb(226, 226, 226);
+  font-family: "Rockwell", cursive;
+  font-size: 1.4rem;
+}
+
+nav .nav-links {
+  display: flex;
+  justify-content: space-around;
+  width: 30%;
+  margin-top: auto;
+  z-index: 999;
+}
+
+.nav-links li {
+  list-style: none;
+}
+
+.nav-links a {
+  color: rgb(226, 226, 226);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: paleturquoise;
+}
+
+.burger {
+  display: none;
+  cursor: pointer;
+}
+
+.burger div {
+  width: 23px;
+  height: 2px;
+  background-color: rgb(226, 226, 226);
+  margin: 5px;
+  transition: all 0.3s ease; /* Animation for cross button */
+}
+
+/* test */
+.navbar-items {
+  padding-top: 10px;
+}
+
+.search-box {
+  outline: none;
+  border: 1px solid #495371;
+}
+
+nav .search-btn {
+  color: white;
+  border: 1px solid paleturquoise;
+}
+
+nav .search-btn:hover {
+  background-color: #495371;
+}
+
+/* Tablets Zone */
+@media screen and (max-width: 1024px) {
+  .nav-links {
+    width: 40%;
+  }
+}
+
+/* Mobile Zone */
+@media screen and (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .nav-links {
+    position: absolute;
+    right: 0px;
+    top: 8vh;
+    height: 92vh;
+    width: 100%;
+    background-color: #495371;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    transform: translateX(100%); /* 100% means (100,0) cordinates */
+    transition: transform 0.5s ease-in;
+  }
+
+  .nav-links li {
+    opacity: 0;
+  }
+
+  .burger {
+    display: block;
+  }
+}
+
+/* to add mobile view animation */
+.nav-active {
+  transform: translateX(0%); /* 0% means (0,0) cordinate */
+}
+
+/* To animate opacity in navlinks in mobile view */
+
+@keyframes navLinkFade {
+  from {
+    opacity: 0;
+    /* transform: translateX(50px); */
+  }
+  to {
+    opacity: 1;
+    /* transform: translateX(50px); */
+  }
+}
+
+/* To make cross symbol when burger is toggled */
+.toggle .line1 {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle .line2 {
+  opacity: 0;
+}
+
+.toggle .line3 {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+
+/* Detail Body CSS */
+
+.whole-container {
+  padding: 5%;
+}
+
+.main-header {
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.sub-header {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.site-desc {
+  /* padding: 4%; */
+  margin: 3% 0 3% 0;
+  text-align: justify;
+  justify-content: center;
+}
+
+.accomodate {
+  margin: 2% 0 2% 0;
+}
+
+i.favourite {
+color: red;
+}
+
+.visit-profile-btn {
+text-decoration: none;
+}
+
+
+/* footer {
+  background-color: azure;
+  margin-top: 3%;
+  padding: 3%;
+  text-align: center;
+} */
+
+footer {
+text-align: center;
+}
+
+
+/* Guide Register */
+
+.img-upload-btn {
+margin-left: 7px;
+}
+
+.container {
+max-width: 960px;
+}
+
+.lh-condensed {
+line-height: 1.25;
+}
+
+.bd-placeholder-img {
+font-size: 1.125rem;
+text-anchor: middle;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+
+@media (min-width: 768px) {
+.bd-placeholder-img-lg {
+    font-size: 3.5rem;
+}
+}
+
+
+/* About CSS */
+.about-header {
+margin: 5% auto 5% auto;
+text-align: center;
+}
+
+.about-desc {
+padding: 0 8% 0 8%;
+justify-content: center;
+text-align: justify;
+}
+
+/* Search Result CSS */
+.search-header {
+margin: 5% auto 5% auto;
+text-align: center;
+}
+
+.search-res {
+padding: 0 15% 0 15%;
+
+}
+
+
+
+
+
+/* normal user OR tourist profile css */
+
+.column1 {
+  margin: 20px;
+  padding: 10px;
+  width: auto
+  
+}
+
+.user_card {
+  height: auto;
+  width: 800px;
+  margin: auto;
+  padding: 0px;
+  align-items: center;
+  border: 3px solid lightgray;
+}
+
+
+.profile {
+  background-color: white;
+  margin-left: 15px;
+  display: block;
+  align-items: center;
+  font-size: large;
+  font-weight: bold;
+}
+
+.aayam_picture {
+  display: flex;
+  align-items: center;
+  border-top: 70px solid rgb(11, 141, 247);
+}
+
+  .aayam_picture img {
+      border-style:groove;
+      
+      height: 150px;
+      width: 150px;;
+      margin-top: -30px;
+      border-radius: 50%;
+      
+  }
+
+.profile_graphics {
+  display: flex;
+  margin: 5px;
+  align-items: center;
+  
+}
+
+.column-container {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  padding: 10px;
+
+}
+
+
+#name {
+  font-size: 26px;
+}
