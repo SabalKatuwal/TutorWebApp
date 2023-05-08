@@ -1,42 +1,3 @@
-<!-- <!DOCTYPE html>
-<a href='/auth/logout' >Logout</a>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-
-    <link rel="stylesheet" href="/style.css">
-    <h1>Home Page</h1>
-    <h3>Under construction</h3>
-    <a href = "auth/tourist_register">Register User</a>
-    
-    
-    <% siteinfo.forEach((site) =>{ %> 
-        <div class = "blog-item">
-            <div class = "blog-img">
-            <img src = "images/swayambhunath.jpg" alt = "">
-            </div>
-            <div class = "blog-text">
-            <span>20 January, 2020</span>
-            <h2><%= site.name %></h2>
-            <p><%= site.description %></p>
-            <a href = "#">Read More</a>
-            </div> 
-    <% })  %>
-    
-
-</body>
-</html>
- -->
-
-
-
-<!-- this is upper part -->
-
 
 
 
@@ -57,39 +18,9 @@
             </div>
         </div>
     </header>
-    <!-- end of header -->
 
 
-    <!-- blog -->
-    <!-- <section class="blog" id="blog">
-        <div class="container">
-            <div class="title">
-                <h2>Popular Sites</h2>
-            </div>
-            <div class="blog-content">
 
-                <% siteinfo.forEach((site,index)=>{ %>
-                    <div class="blog-item">
-                        <div class="blog-img">
-                          
-                        </div>
-                        <div class="blog-text">
-                            <span><%= site.created %></span>
-                            <h2>
-                                <%= site.name %>
-                            </h2>
-                            <p>
-                                <%= site.description.substring(0,300) %>
-                            </p>
-                            <a href="/detail/<%= site.site_id%>">Read More</a>
-                        </div>
-                        
-                    </div>
-                <% }) %>
-            </div>
-        </div>
-    </section> -->
-    <!-- end of blog -->
 
     <%- include("footer") -%>
 

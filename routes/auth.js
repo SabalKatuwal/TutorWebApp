@@ -7,22 +7,38 @@ const authController = require('../controllers/auth'); //to go one directory bac
 const { render } = require('express/lib/response');
 
 
-
-
-router.get('/login', (req, res)=>{
+//intermediate routes for login and register
+router.get('/intermediate_register', (req, res)=>{
     if(!req.session.userinfo){
-        return res.render('login.ejs');
+        return res.render('intermediate_register.ejs');
+    }
+    res.redirect('/')
+});
+router.get('/intermediate_login', (req, res)=>{
+    if(!req.session.userinfo){
+        return res.render('intermediate_login.ejs');
+    }
+    res.redirect('/')
+});
+
+
+router.get('/student_login', (req, res)=>{
+    if(!req.session.userinfo){
+        return res.render('student_login.ejs');
     }
     res.redirect('/')
     
 });
-router.get('/guide_login', (req, res)=>{
-    res.render('guide_login.ejs');
+router.get('/tutor_login', (req, res)=>{
+    if(!req.session.userinfo){
+        return res.render('tutor_login.ejs');
+    }
+    res.redirect('/')
 });
 
-router.get('/guide_register', (req, res)=>{
-    res.render('guide_register.ejs');
-});
+// router.get('/guide_register', (req, res)=>{
+//     res.render('guide_register.ejs');
+// });
 
 router.get('/student_register', (req, res)=>{
     if(!req.session.userinfo){
@@ -50,15 +66,22 @@ router.post('/student_register',[
         .normalizeEmail()
 ],authController.student_register)   
 
-router.post('/login',authController.login)
+router.post('/student_login',authController.login_student)
 
 
-//for guide
+//for tutor
+router.get('/tutor_register', (req, res)=>{
+    if(!req.session.userinfo){
+        return res.render('tutor_register.ejs');
+    }
+    res.redirect('/')
+});
 
-router.post('/guide_register',[
-    check('citizenshipNumber', 'Invalid citizenship number')
-        .exists()
-        .isLength(14),
+router.post('/tutor_register',
+// [
+//     check('citizenshipNumber', 'Invalid citizenship number')
+//         .exists()
+//         .isLength(14),
     // check("passwordConfirm")     
     //     .custom((value,{req}) =>{
     //         if(value !== req.body.password){
@@ -68,9 +91,10 @@ router.post('/guide_register',[
     //     }
     //     ).withMessage("Email already taken"),
     
-],authController.guide_register) 
+// ],
+authController.tutor_register) 
 
-router.post('/guide_login',authController.guide_login)
+router.post('/tutor_login',authController.tutor_login)
 
 
 

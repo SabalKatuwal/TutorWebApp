@@ -97,7 +97,7 @@ exports.student_register = (req,res)=> {
                 }
                 else{
                     message.push('User Registered')
-                    return res.render('login',{message});
+                    return res.render('student_login',{message});
                 }
             })
         }        
@@ -113,7 +113,7 @@ exports.student_register = (req,res)=> {
 //     <% } %>
 
 
-exports.login = (req, res)=>{
+exports.login_student = (req, res)=>{
     const {username, password } = req.body;
     (
         async function(){
@@ -141,12 +141,12 @@ exports.login = (req, res)=>{
                                 return res.redirect('/')
                             }
                             else{
-                                return res.render('login')
+                                return res.render('student_login')
                             }
                             
                         })
                     }else{
-                        return res.render('login')
+                        return res.render('student_login')
                   }
                         // if(results.password == hashedPassword){
                         //     //req.session.username = results.username
@@ -187,60 +187,148 @@ exports.logout = (req, res)=>{
 for guide
 */
 
-exports.guide_register = (req,res)=> {
-    const id = req.session.userinfo.user_id
-    console.log(id)
-    const { citizenshipName, citizenshipNumber, contactNumber, guidePicture, address, isguide , district} = req.body;
+exports.tutor_register = (req,res)=> {
+    const {username, firstname, lastname, email, password, passwordConfirm } = req.body;
+    var message = [];
     const errors = validationResult(req)
-    console.log(req.body)
-        
-    if(!errors.isEmpty()) {
-        // return res.status(422).jsonp(errors.array())
-        const alert = errors.array()
-        res.render('guide_register', {alert})
-    }
-    else{
-        db.query('INSERT INTO guide SET ?',{userID:id ,address:address, contactNumber:contactNumber, guidePicture:guidePicture, citizenshipName:citizenshipName, citizenshipNumber:citizenshipNumber, isguide:isguide , district:district}, (error, results)=>{
-            if(error){
-                console.log(error);
-            }
-            else{
-                console.log('guide registered in database')
-                return res.redirect('/');  
-            }
-        })
-    }        
-}
-
-exports.guide_login = (req, res)=>{
-    const {username, password } = req.body;  
-    //const hashedPassword = await hashit(password);
-    db.query('SELECT * FROM guide WHERE username = ?',[username], async (error, results)=>{
+    //one person with one email can register one time & if passsword and passwordConfirm matches
+    db.query('SELECT email FROM tutor WHERE email = ?',[email], async (error, results)=>{
         if(error){
             console.log(error);
         }
+        
+        if (results.length > 0 ){
+            message.push('Email already used')
+            return res.render('tutor_register',{message});
+        } 
+        else if(password !== passwordConfirm) {
+            message.push('password donot match')
+            return res.render('tutor_register',{message});
+        };
 
-        if(results.length>0){
-            bcrypt.compare(req.body.password,results[0].passwords,(error,results)=>{
+        
+        if(!errors.isEmpty()) {
+            // return res.status(422).jsonp(errors.array())
+            const alert = errors.array()
+            res.render('tutor_register', {alert})
+        }
+        else{
+            let hashedPassword = await hashit(password);//bcrypt.hash(password, 8); //8 round to incript pw
+
+            db.query('INSERT INTO tutor SET ?',{username: username,firstname: firstname, lastname: lastname, email: email, passwords: hashedPassword }, (error, results)=>{
                 if(error){
-                    console.log(error)
-                }
-                if(results){
-                    req.session.userinfo = username
-                    console.log(req.session.userinfo)
-                    return res.redirect('/')
+                    console.log(error);
                 }
                 else{
-                    return res.redirect('/guide_login')
+                    message.push('Tutor Registered')
+                    return res.render('tutor_login',{message});
                 }
-                
             })
-        }else{
-            return res.redirect('/guide_login')
-    }
-    })
+        }        
+        
+    });        
 }
+
+// exports.tutor_login = (req, res)=>{
+//     const {username, password } = req.body;  
+//     //const hashedPassword = await hashit(password);
+//     db.query('SELECT * FROM tutor WHERE username = ?',[username], async (error, results)=>{
+//         if(error){
+//             console.log(error);
+//         }
+
+//         if(results.length>0){
+//             bcrypt.compare(req.body.password,results[0].passwords,(error,results)=>{
+//                 if(error){
+//                     console.log(error)
+//                 }
+//                 if(results){
+//                     req.session.userinfo = username
+//                     console.log(req.session.userinfo)
+//                     return res.redirect('/')
+//                 }
+//                 else{
+//                     return res.redirect('/tutor_login')
+//                 }
+                
+//             })
+//         }else{
+//             return res.redirect('/tutor_login')
+//     }
+//     })
+// }
             
+
+exports.tutor_login = (req, res)=>{
+    const {username, password } = req.body;
+    (
+        async function(){
+            try{
+                let formula
+                const hashedPassword = await hashit(password);
+                db.query('SELECT * FROM tutor WHERE username = ?',[username], async (error, results)=>{
+                    formula = results[0]
+                    if(error){
+                        console.log(error);
+                    }
+                    console.log('results',results,results.length);
+
+                    // if(results.length>0){
+                    //     bcrypt.compare(req.body.password,results[0].passwords,(error,results)=>{
+                    //         if(error){
+                    //             console.log(error)
+                    //         }
+                    //         console.log('results = ',results)
+                    //         if(results){
+                                
+                    //             req.session.userinfo = formula
+                    //             console.log("results=",formula)
+                    //             console.log("session= ",req.session.userinfo)
+                    //             return res.redirect('/')
+                    //         }
+                    //         else{
+                    //             return res.render('tutor_login')
+                    //         }
+                            
+                    //     })
+                    // }else{
+
+                        if(results.length>0){
+                            bcrypt.compare(req.body.password,results[0].passwords,(error,results)=>{
+                                if(error){
+                                    console.log(error)
+                                }
+                                console.log(results)
+                                if(results){
+                                    req.session.userinfo = formula
+                                    console.log(req.session.userinfo)
+                                    return res.redirect('/')
+                                }
+                                else{
+                                    return res.redirect('/tutor_login')
+                                }
+                                
+                            })
+                        }else{
+                        return res.render('tutor_login')
+                  }
+                        // if(results.password == hashedPassword){
+                        //     //req.session.username = results.username
+                        //     return res.render('index',)
+                        // } 
+                    
+                    
+                })
+            }
+            catch(err){
+                console.log(err);
+            }
+        }
+    )()
+
+}
+
+
 
 exports.profile = (req,res)=> {
     console.log(req.session)

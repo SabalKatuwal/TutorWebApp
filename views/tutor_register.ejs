@@ -1,0 +1,216 @@
+<%- include("header") -%>
+<!-- register for teacher -->
+
+<div class="container">
+    <div class="py-5 text-center">
+        
+        <h2>Become a Teacher</h2>
+        <p class="lead">Please fill out the form below.</p>
+    </div>
+
+    
+        <div class="col-md-12 order-md-1">
+            <h3 class="mb-3">Basic Information</h3>
+            <form action= "/auth/tutor_register" method = "POST" class="needs-validation" >
+          
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="cc-name">First Name</label>
+                        <input type="text" class="form-control" id="f-name"  name="firstname" required>
+                        <div class="invalid-feedback">
+                            Name required
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="cc-number">Middle Name</label>
+                        <input type="text" class="form-control" id="m-number" placeholder="" name="middlename">
+                        
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="cc-number">Last Name</label>
+                        <input type="text" class="form-control" id="cc-number" placeholder="" name="lastname">
+                        <div class="invalid-feedback">
+                            Citizenship number is required
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name= "username" required>
+                        <div class="invalid-feedback">
+                            Please enter the username!
+                        </div>
+                    </div>
+                    <div class="col-md-8 mb-3 my-2">
+                        <label for="gender">Gender:</label>
+                        <!-- <input type="text" class="form-control" id="gender" name= "gender" required> -->
+                        <input type="radio" name="grpGender" value="Male" Checked>Male
+                        <input type="radio" name="grpGender" value="Female">Female
+                        <div class="invalid-feedback">
+                            Please choose the gender!
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="username">Email Id</label>
+                    <input type="text" class="form-control" id="email" name= "email" required>
+                    <div class="invalid-feedback">
+                        Please enter the email address!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" placeholder="Eg: Butwal-8, Rupandehi" name= "address" required>
+                    <div class="invalid-feedback">
+                        Please enter your current address.
+                    </div>
+                </div>
+                
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="address">District</label>
+                        <input type="text" class="form-control" id="district" placeholder="" name= "district" >
+                        <!-- <div class="invalid-feedback">
+                            Please enter your district.
+                        </div> -->
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="address">City</label>
+                        <input type="text" class="form-control" id="city" placeholder="" name= "city" >
+                        <!-- <div class="invalid-feedback">
+                            Please enter your district.
+                        </div> -->
+                    </div>
+                </div>
+            
+                <div class="mb-3">
+                    <label for="address2">Contact Number</label>
+                    <input type="text" class="form-control" id="address2" placeholder="Eg: 9867227502" name="contactNumber" required>
+                    <div class="invalid-feedback">
+                        Please enter your phone number
+                    </div>
+                </div>
+            
+                <div class="mb-3">
+                    <label for="picture">Upload your Picture:</label>
+                    <input type="file" class="img-upload-btn" id="picture" name="guidePicture">
+                </div>
+            
+                <div class="mb-3">
+                    <label for="address2">Subjects</label>
+                    <div style="width:40%;">
+ 
+                        <div class="mb-3">
+                            <div class="col-lg-12">
+                                <div id="row">
+                                    <div class="input-group m-3">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-danger"
+                                                id="DeleteRow" type="button">
+                                                <i class="bi bi-trash"></i>
+                                                Delete
+                                            </button>
+                                        </div>
+                                        <input type="text"
+                                            class="form-control m-input" name="subject">
+                                    </div>
+                                </div>
+             
+                                <div id="newinput"></div>
+                                <button id="rowAdder" type="button"
+                                    class="btn btn-dark">
+                                    <span class="bi bi-plus-square-dotted">
+                                    </span> ADD
+                                </button>
+                            </div>
+                        </div>
+                </div>
+                
+             
+            
+                </div>
+            </div>    
+
+                <!-- education  -->
+                <hr class="mb-4">
+            
+                <h3 class="mb-3">Education </h3>
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label for="undergraduate-name">Undergraduate College Name</label>
+                        <input type="text" class="form-control" id="undergraduate-name" placeholder="college name" required>
+                        <div class="invalid-feedback">
+                            College name is required
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="Grade">Grade:</label>
+                        <input type="text" class="form-control" id="grade-college" placeholder="" name="grade-college" required >
+                        
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="picture">Upload gradesheet:</label>
+                    <input type="file" class="img-upload-btn" id="gradesheet" name="undergraduate-grade" required>
+                </div>
+
+                <!-- graduate college -->
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label for="graduate-name">Graduate College Name(optional)</label>
+                        <input type="text" class="form-control" id="graduate-name" placeholder="college name" >
+                        
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="Grade">Grade:</label>
+                        <input type="text" class="form-control" id="grade-college" placeholder="" name="grade-college" required >
+                        
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="picture">Upload gradesheet:</label>
+                    <input type="file" class="img-upload-btn" id="gradesheet" name="undergraduate-grade">
+                </div>
+                <!-- verification for eligibility -->
+                <hr class="mb-4">
+            
+                <h4 class="mb-3">Verification</h4>
+            
+                <div class="d-block my-3">
+                    <div class="custom-control custom-radio">
+                        <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked
+                            required>
+                        <label class="custom-control-label" for="credit">Citizenship Certificate</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="cc-name">Name on your Certificate</label>
+                        <input type="text" class="form-control" id="cc-name" placeholder="citizenshipName" required>
+                        <small class="text-muted">Full name as displayed on certicicate</small>
+                        <div class="invalid-feedback">
+                            Name on card is required
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="cc-number">Citizenship number</label>
+                        <input type="text" class="form-control" id="cc-number" placeholder="" name="citizenshipNumber" required>
+                        <div class="invalid-feedback">
+                            Citizenship number is required
+                        </div>
+                    </div>
+                </div>
+                
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    
+<!-- footer -->
+
+
+<%- include("footer") -%>

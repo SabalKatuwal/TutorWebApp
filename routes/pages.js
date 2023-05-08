@@ -48,7 +48,7 @@ router.get('/search_result', (req,res)=>{
 });
 
 
-router.get('/detail/:site_id', pageController.detail_view);
+router.get('/detail/:id', pageController.detail_view);  //id is tutor ko id
 
 router.post('/place_upload',upload.array('picture',12),pageController.place_upload) 
 
