@@ -75,6 +75,7 @@ exports.index = (req,res)=> {
     //     }
                  
     // })
+    console.log(req.session.userinfo)
     return res.render('index', {user:req.session.userinfo})
 };
 
@@ -193,10 +194,19 @@ exports.search_result = (req,res)=> {
             console.log(error)
         }
         else{
-            console.log(result[0].id)
+            
+            console.log("hello" + result[0].id)
             db.query("SELECT * FROM tutor where id = ?",[result[0].id],(error, id)=>{
+                console.log(id[0])
                 res.render("search_result", {tutor:result,id:id[0]});
+                // if (id[0]) {
+                //     res.render("search_result", {tutor:result,id:id[0]});
+                // }else{
+                //     console.log("usernotfound")
+                // }
+                
             })
         }
+        
     })
 }

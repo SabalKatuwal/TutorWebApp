@@ -1,9 +1,141 @@
 <%- include("header") -%>
 
-<div class="container-fluid whole-container">
-    <h1 class="main-header"><%= tutor.username %> <span><button type="button" class="btn btn-light fav-btn">Favourite <i class = "fa-solid fa-heart"></i></button></span></h1>
-    
+<div class="container emp-profile">
+        
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-img">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                <div class="file btn btn-lg btn-primary">
+                    Change Photo
+                    <input type="file" name="file"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="profile-head">
+                        <h5>
+                            <%= tutor.username %>
+                        </h5>
+                        
+                    
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
 
+            <div class="col-md-2">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-stroke"></i>
+                <span>(4.5/5)</span>
+            </div>
+        
+        
+    </div>
+    <div class="row">
+    
+        <div class="col-md-8">
+            <div class="tab-content profile-tab" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            
+                    <!-- copy from here -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Username</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><%= tutor.username %></p>
+                                </div>
+                            </div>
+                    <!-- to here: to add new row -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Name</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><%= tutor.firstname %></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><%= tutor.email %></p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Contact No:</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><%= tutor.contactNumber %></p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Experience</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>Expert</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Monthly Fees</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>10$</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Total Teaching Hours</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>230</p>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>English Level</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>Expert</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Availability</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>6 months</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>About Me</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <p style="text-align: justify;">Hello, I am a highly experienced and skilled mathematics teacher with a passion for educating students of all ages. With 10 years of teaching experience under their belt, I have had honed my ability to create engaging lesson plans and foster a positive learning environment in the classroom. I possess a deep understanding of mathematical concepts and are dedicated to helping my students develop a strong foundation in mathematics, regardless of their current skill level. I am known for my patient, supportive teaching style and my ability to help students overcome their challenges in math. My expertise in the field of mathematics and my commitment to student success has made me a highly respected educator in the community.</p>
+                                </div>
+                            </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
 </div>
 
 <%- include("footer") -%>

@@ -1,27 +1,155 @@
-
-
-
 <%- include("header") -%>
-    <header>
-        <div class="banner">
-            <div class="container">
-                <h1 class="banner-title">
-                    <span>Find nearby Tutor</span>
-                </h1>
-                <p>Finding the right tutor can make all the difference in achieving academic success.</p>
-                <form action="/search_result" method="POST">
-                    <input type="text" class="search-input" placeholder="Find my Tutor" name = "body">
-                    <button type="submit" class="home-search-btn my-2">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
-            </div>
+
+<header>
+    <div class="banner">
+        <div class="container">
+            <h1 class="banner-title">
+                <span>Find nearby Tutor</span>
+            </h1>
+            <p>Finding the right tutor can make all the difference in achieving academic success.</p>
+            <form action="/search_result" method="POST">
+                <input type="text" class="search-input" placeholder="Find my Tutor" name = "body">
+                <button type="submit" class="home-search-btn my-2">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
         </div>
-    </header>
+    </div>
+</header>
 
 
 
 
-    <%- include("footer") -%>
+<!-- Features -->
 
-        <!-- <a href="auth/tourist_register">Register User</a> -->
+<section id="features">
+    <div class="row">
+      <div class="feature-box col-lg-4">
+        <i class="icon fas fa-check-circle fa-4x"></i>
+        <h3>Easy to use.</h3>
+        <p>So easy to use.</p>
+      </div>
+
+      <div class="feature-box col-lg-4">
+        <i class="icon fas fa-bullseye fa-4x"></i>
+        <h3>Elite Clientele</h3>
+        <p>Cool.</p>
+      </div>
+
+      <div class="feature-box col-lg-4">
+        <i class="icon fas fa-heart fa-4x"></i>
+        <h3>Guaranteed to work.</h3>
+        <p>Find your best tutor.</p>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+<!-- Testimonials -->
+
+<section>
+    <h2 class="my-5" style="text-align: center;" >Testimonials</h2>
+    <div class="container mt-5 mb-5">
+
+        <div class="row g-2">
+            <div class="col-md-4">
+                <div class="card p-3 text-center px-4">
+                    
+                    <div class="user-image">
+                        
+                <img src="images/dog-img.jpg" class="rounded-circle" width="80">
+                        
+                    </div>
+                    
+                    <div class="user-content">
+                        
+                        <h5 class="mb-0 mt-2">Bruce Hardy</h5>
+                        <span style="color: #495371">Student</span>
+                        <p class="my-2" style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        
+                    </div>
+                    
+                    <div class="ratings">
+                        <i class="icon fa fa-star"></i>
+                        <i class="icon fa fa-star"></i>
+                        <i class="icon fa fa-star"></i>
+                        <i class="icon fa fa-star"></i>
+                        <i class="icon fa fa-star"></i>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card p-3 text-center px-4">
+                    
+                    <div class="user-image">
+                        
+                <img src="images/lady-img.jpg" class="rounded-circle" width="80">
+                        
+                    </div>
+                    
+                    <div class="user-content">
+                        
+                        <h5 class="mb-0 mt-2">Bruce Hardy</h5>
+                        <span style="color: #495371">Tutor</span>
+                        <p class="my-2" style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        
+                    </div>
+                    
+                    <div class="ratings">
+                        <i class="icon fa fa-star"></i>
+                        <i class="icon fa fa-star"></i>
+                        <i class="icon fa fa-star"></i>
+                        <i class="icon fa fa-star"></i>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card p-3 text-center px-4">
+                    
+                    <div class="user-image">
+                        
+                <img src="images/dog-img.jpg" class="rounded-circle" width="80">
+                        
+                    </div>
+                    
+                    <div class="user-content">
+                        
+                        <h5 class="mb-0 mt-2">Bruce Hardy</h5>
+                        <span style="color: #495371">Student</span>
+                        <p class="my-2" style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        
+                    </div>
+                    
+                    <div class="ratings">
+                        <i class="icon fa fa-star"></i>
+                        <i class="icon fa fa-star"></i>
+                        <i class="icon fa fa-star"></i>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+</section>
+
+<% if (!user){ %>
+<!-- Call to Action -->
+<section id="cta">
+    <h3 class="cta-title">Find the true instructor for you, Today!</h3>
+    <a href="/auth/intermediate_login"><button class="btn btn-lg btn-info download-button m-1" type="button">Login</button></a>
+    <a href="/auth/intermediate_register"><button class="btn btn-lg btn-light download-button m-1" type="button">Register</button></a>
+</section>
+<% } %>
+<%- include("footer") -%>

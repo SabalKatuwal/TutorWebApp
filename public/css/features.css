@@ -1,0 +1,22 @@
+/* Features Section */
+
+#features {
+    padding: 7% 14%;
+    background-color: white;   /* Default bg color is see-through(Transparent) */
+    position: relative;
+    z-index: 1;
+  }
+  
+  .feature-box {
+    text-align: center;
+    padding: 4.5%;
+  }
+  
+  .icon {
+    color: #495371;
+    margin-bottom: 1.2rem;
+  }
+  
+  .icon:hover {
+    color: paleturquoise;
+  }

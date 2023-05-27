@@ -188,17 +188,17 @@ for guide
 */
 
 exports.tutor_register = (req,res)=> {
-    const {username, firstname, lastname, email, password, passwordConfirm } = req.body;
+    const {username, firstname,lastname, middlename, grpGender, email, password, passwordConfirm, address, contactNumber, tutorPicture, subject, bio, educationLevel, collegegrade, collegegradesheet, citizenshipName, citizenshipNumber, licenseName, licenseNumber } = req.body;
     var message = [];
     const errors = validationResult(req)
     //one person with one email can register one time & if passsword and passwordConfirm matches
-    db.query('SELECT email FROM tutor WHERE email = ?',[email], async (error, results)=>{
+    db.query('SELECT username FROM tutor WHERE username = ?',[username], async (error, results)=>{
         if(error){
             console.log(error);
         }
         
         if (results.length > 0 ){
-            message.push('Email already used')
+            message.push('username already used')
             return res.render('tutor_register',{message});
         } 
         else if(password !== passwordConfirm) {
@@ -213,16 +213,22 @@ exports.tutor_register = (req,res)=> {
             res.render('tutor_register', {alert})
         }
         else{
-            let hashedPassword = await hashit(password);//bcrypt.hash(password, 8); //8 round to incript pw
+            let hashedPassword = await hashit(password); //bcrypt.hash(password, 8);  //8 round to incript pw
 
-            db.query('INSERT INTO tutor SET ?',{username: username,firstname: firstname, lastname: lastname, email: email, passwords: hashedPassword }, (error, results)=>{
-                if(error){
-                    console.log(error);
-                }
-                else{
-                    message.push('Tutor Registered')
-                    return res.render('tutor_login',{message});
-                }
+            db.query('INSERT INTO tutor SET ?',{username: username,firstname: firstname, lastname: lastname, middlename:middlename, grpGender:grpGender, email: email, passwords: hashedPassword, address: address, contactNumber:contactNumber, tutorPicture:tutorPicture, subject:subject, bio:bio,educationLevel:educationLevel, collegegrade:collegegrade, collegegradesheet:collegegradesheet,citizenshipName:citizenshipName, citizenshipNumber:citizenshipNumber, licenseName:licenseName, licenseNumber:licenseNumber }, (error, results)=>{
+                // db.query('INSERT INTO tutor_subject SET ?', {subject: subject}, (subject, error1)=>{
+                    if(error){
+                        console.log(error);
+                    }
+                    else{
+                        console.log("HereisHero")
+                        message.push('Tutor Registered')
+                        return res.render('tutor_login',{message});
+                        // return res.redirect('/tutor_login');
+                    }
+
+                // })
+                
             })
         }        
         
@@ -264,7 +270,7 @@ exports.tutor_login = (req, res)=>{
     (
         async function(){
             try{
-                let formula
+                let formula;
                 const hashedPassword = await hashit(password);
                 db.query('SELECT * FROM tutor WHERE username = ?',[username], async (error, results)=>{
                     formula = results[0]
@@ -298,18 +304,20 @@ exports.tutor_login = (req, res)=>{
                                 if(error){
                                     console.log(error)
                                 }
-                                console.log(results)
+                                console.log("check" + results)
                                 if(results){
                                     req.session.userinfo = formula
                                     console.log(req.session.userinfo)
                                     return res.redirect('/')
                                 }
                                 else{
-                                    return res.redirect('/tutor_login')
+                                    console.log("ERROR-1")
+                                    return res.render('tutor_login')
                                 }
                                 
                             })
                         }else{
+                            console.log("ERROR-2")
                         return res.render('tutor_login')
                   }
                         // if(results.password == hashedPassword){

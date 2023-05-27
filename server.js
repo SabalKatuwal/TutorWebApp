@@ -64,6 +64,13 @@ app.use(
     })
 );
 
+// middleware to pass variable to all templates
+app.use(function(req, res, next){
+    // console.log(req.session.userinfo);
+    res.locals.isLoggedIn = req.session.userinfo;
+    next()
+})
+
 //define all routes
 
 app.use('/', require('./routes/pages'))     

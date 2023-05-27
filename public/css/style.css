@@ -14,6 +14,8 @@ nav {
   font-family: "Poppins", sans-serif;
   /* background-color: #5D4954; */
   background-color: #495371;
+  /* background-color: #ef8172; */
+  /* background-color: #FF8300; */
 }
 
 nav .logo {
@@ -42,6 +44,7 @@ nav .nav-links {
 
 .nav-links a:hover {
   color: paleturquoise;
+  /* color: #ef8172; */
 }
 
 .burger {
@@ -193,6 +196,10 @@ footer {
 text-align: center;
 }
 
+.footy {
+  color: #495371;
+}
+
 
 /* Guide Register */
 
@@ -246,9 +253,6 @@ text-align: center;
 padding: 0 15% 0 15%;
 
 }
-
-
-
 
 
 /* normal user OR tourist profile css */
