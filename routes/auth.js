@@ -5,8 +5,8 @@ const {check, validationResult} = require('express-validator')
 
 const authController = require('../controllers/auth'); //to go one directory back and go to controller/auth.js
 const { render } = require('express/lib/response');
-const upload = require('../server')
 
+const upload = require('../middleware/upload'); 
 
 //intermediate routes for login and register
 router.get('/intermediate_register', (req, res)=>{
@@ -58,14 +58,16 @@ router.get('/profile',authController.profile)
     POST Method here
 */
 
-router.post('/student_register',[
-    check('username', 'This username must me 3+ characters long')
-        .exists()
-        .isLength({ min: 3 }),
-    check('email', 'Email is not valid')
-        .isEmail()
-        .normalizeEmail()
-],authController.student_register)   
+router.post('/student_register',upload.single("studentPicture"),
+// [
+//     check('username', 'This username must me 3+ characters long')
+//         .exists()
+//         .isLength({ min: 3 }),
+//     check('email', 'Email is not valid')
+//         .isEmail()
+//         .normalizeEmail()
+// ],
+authController.student_register)   
 
 router.post('/student_login',authController.login_student)
 
@@ -78,7 +80,7 @@ router.get('/tutor_register', (req, res)=>{
     res.redirect('/')
 });
 
-router.post('/tutor_register', //upload.single("tutorPicture"),
+router.post('/tutor_register', upload.single("tutorPicture"),
 // [
 //     check('citizenshipNumber', 'Invalid citizenship number')
 //         .exists()

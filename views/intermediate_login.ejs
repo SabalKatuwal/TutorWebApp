@@ -1,4 +1,18 @@
+<%- include("header") -%>
 
 
-<li><a href="/auth/student_login"><button type="button" class="btn btn-info btn-sm">Login as Student </button></a></li>
-<li><a href="/auth/tutor_login"><button type="button" class="btn btn-light btn-sm">Login as Tutor</button></a></li>
+  
+  <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; height: 100vh;">
+    <a href="/auth/student_login" style="text-decoration: none; display: flex; flex-direction: column; align-items: center;">
+      <img src="/images/login-illustration.avif" alt="Student Image" style="width: 100%; max-width: 200px; height: auto;">
+      <button class="btn btn-lg btn-info download-button m-1" type="button" style="margin: 10px; height: 100%;">Login as a Student</button>
+    </a>
+    <a href="/auth/tutor_login" style="text-decoration: none; display: flex; flex-direction: column; align-items: center;">
+      <img src="/images/teacher.jpeg" alt="Tutor Image" style="width: 100%; max-width: 200px; height: auto;">
+      <button class="btn btn-lg btn-dark download-button m-1" type="button" style="margin: 10px; height: 100%;">Login as a Tutor</button>
+    </a>
+  </div>
+  
+  
+  
+<%- include("footer") -%>

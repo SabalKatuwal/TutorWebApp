@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path =require('path');
-const multer  = require('multer')
+// const multer  = require('multer')
 // const upload = multer()
 
 const session = require('express-session');
@@ -47,20 +47,21 @@ var sessionStore = new MySQLStore({
 },db);
 
 
-// Configure multer storage
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, "uploads/"); // Specify the destination folder to store the uploaded files
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.originalname); // Use the original filename for storing the file
-    },
-  });
+// // Configure multer storage
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//       cb(null, "public/uploads/"); // Specify the destination folder to store the uploaded files
+//     },
+//     filename: function (req, file, cb) {
+//       cb(null, file.originalname); // Use the original filename for storing the file
+//     },
+//   });
   
 
 //for keeping the files of css 
 app.use(express.static("public"));
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
+// module.exports = upload;
 // app.use(cors())
 
 

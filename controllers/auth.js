@@ -116,6 +116,8 @@ exports.student_register = (req, res) => {
     const message = [];
      // Declare message as an array
     console.log(req.body);
+
+    const studentPicture = req.file.filename;
   
     const { username, firstname, lastname, email, password, passwordConfirm } = req.body;
     
@@ -144,7 +146,7 @@ exports.student_register = (req, res) => {
   
       
       let hashedPassword = await hashit(password);//bcrypt.hash(password, 8); //8 round to incript pw
-      db.query('INSERT INTO student SET ?', { username: username, firstname: firstname, lastname: lastname, email: email, passwords: hashedPassword }, (error, results) => {
+      db.query('INSERT INTO student SET ?', { username: username, firstname: firstname, lastname: lastname, email: email, passwords: hashedPassword, studentPicture:studentPicture }, (error, results) => {
         if (error) {
           console.log(error);
         } else {
@@ -240,7 +242,9 @@ for guide
 */
 
 exports.tutor_register = (req,res)=> {
-    const {username, firstname,lastname, middlename, grpGender, email, password, passwordConfirm, address, contactNumber, tutorPicture, subject, bio, educationLevel, collegegrade, collegegradesheet, citizenshipName, citizenshipNumber, licenseName, licenseNumber, availability, monthlyFee, experience } = req.body;
+    const tutorPicture = req.file.filename;
+    // console.log("picture" + tutorPicture)
+    const {username, firstname,lastname, middlename, grpGender, email, password, passwordConfirm, address, contactNumber, subject, bio, educationLevel, collegegrade, collegegradesheet, citizenshipName, citizenshipNumber, licenseName, licenseNumber, availability, monthlyFee, experience } = req.body;
     var message = [];
     const errors = validationResult(req)
     //one person with one email can register one time & if passsword and passwordConfirm matches
@@ -395,16 +399,16 @@ exports.tutor_login = (req, res)=>{
 exports.profile = (req,res)=> {
     console.log(req.session)
     if(req.session.userinfo){
-        let isguide = req.session.userinfo.isGuide
-        if(isguide){
-            db.query("select * from guide where userID = ?",[req.session.userinfo.user_id],(error, guideinfo)=>{
+        let isTutor = req.session.userinfo.isTutor;
+        if(isTutor){
+            db.query("select * from tutor where id = ?",[req.session.userinfo.user_id],(error, tutorinfo)=>{
                 // console.log(combined)
-                return res.render('user_profile',{session:req.session.userinfo, guideinfo:guideinfo[0]})
+                return res.render('tourist_profile',{session:req.session.userinfo, tutorinfo:tutorinfo[0]})
             })
         }
         else{
             
-            return res.render('tourist_profile',{session:req.session.userinfo})
+            return res.render('user_profile',{session:req.session.userinfo})
         }
     }
     else{
