@@ -6,26 +6,30 @@
 
 
 <div class="container-fluid search-res">
-  <% tutor.forEach((s) => { %>
-    <% if (s.id % 3 === 1) { %>
-      <div class="row row-cols-3 justify-content-center">
-    <% } %>
+  <% if (noResults) { %>
+    <h4 style="text-align: center;">No Results Found</h4>
+  <% } else { %>
+    <% tutor.forEach((s) => { %>
+      <% if (s.id % 3 === 1) { %>
+        <div class="row row-cols-3 justify-content-center">
+      <% } %>
 
-    <div class="col mb-4">
-      <div class="card">
-        <img src="/uploads/<%= s.tutorPicture %>" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title"><%= s.username %></h5>
-          <p class="card-text"><%= s.firstname %></p>
-          <a href="/detail/<%= s.id %>" class="card-link">Read More</a>
+      <div class="col mb-4">
+        <div class="card">
+          <img src="/uploads/<%= s.tutorPicture %>" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"><%= s.username %></h5>
+            <p class="card-text"><%= s.firstname %></p>
+            <a href="/detail/<%= s.id %>" class="card-link">Read More</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <% if (s.id % 3 === 0 || s.id === tutor.length) { %>
-      </div>
-    <% } %>
-  <% }) %>
+      <% if (s.id % 3 === 0 || s.id === tutor.length) { %>
+        </div>
+      <% } %>
+    <% }) %>
+  <% } %>
 </div>
 
 

@@ -158,14 +158,15 @@ exports.return_places = (req,res)=> {
 // };
 
 exports.contact_us = (req,res)=> {
+    const msg = []
     const {name, email, message} = req.body
-    db.query('INSERT INTO contact_us SET ?',{name: name, email:email, message:message}, (error, results)=>{
+    db.query('INSERT INTO contactUs SET ?',{name: name, email:email, message:message}, (error, results)=>{
         if(error){
             console.log(error);
         }
         else{
-            console.log('your response is registered')
-            return res.redirect('/');
+            msg.push('your response is registered')
+            return res.render('contact', {msg: msg});
         }
     })
 };
@@ -196,14 +197,21 @@ exports.search_result = (req,res)=> {
             console.log(error)
         }
         else{
-            
-            
-            db.query("SELECT * FROM tutor where id = ?",[result[0].id],(error, id)=>{
-                console.log(id[0])
-                res.render("search_result", {tutor:result,id:id[0]});
 
-                
-            })
+            if (result.length > 0){
+                db.query("SELECT * FROM tutor where id = ?",[result[0].id],(error, id)=>{
+                    console.log(id[0])
+                    res.render("search_result", {tutor:result,id:id[0]});
+    
+                    
+                });
+            } else {
+                //no result found
+                res.render("search_result", { tutor: [], id: null, noResults: true });
+            }
+            
+            
+            
         }
         
     })

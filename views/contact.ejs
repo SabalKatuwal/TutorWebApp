@@ -1,5 +1,17 @@
 <%- include('header') -%>
-
+<% if(typeof msg != 'undefined') { %>
+    <% if (msg && msg.length > 0) { %>
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <% msg.forEach((mess) => { %>
+          <p><%= mess %></p>
+        <% }) %>
+      </div>
+    <% } %>
+  <% } %>
+  
 <div class="container">
     <div class="py-5 text-center">
         
