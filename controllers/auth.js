@@ -61,52 +61,100 @@ const db = mysql.createConnection({
 
 
 
-exports.student_register = (req,res)=> {
-    console.log(req.body);
+// exports.student_register = (req,res)=> {
+//     console.log(req.body);
 
-    const {username, firstname, lastname, email, password, passwordConfirm } = req.body;
-    var message = [];
-    const errors = validationResult(req)
-    //one person with one email can register one time & if passsword and passwordConfirm matches
-    db.query('SELECT email FROM student WHERE email = ?',[email], async (error, results)=>{
-        if(error){
-            console.log(error);
-        }
+//     const {username, firstname, lastname, email, password, passwordConfirm } = req.body;
+//     var message = [];
+//     const errors = validationResult(req)
+//     //one person with one email can register one time & if passsword and passwordConfirm matches
+//     db.query('SELECT email FROM student WHERE email = ?',[email], async (error, results)=>{
+//         if(error){
+//             console.log(error);
+//         }
         
-        if (results.length > 0 ){
-            message.push('Email already used')
-            return res.render('student_register',{message});
-        } 
-        else if(password !== passwordConfirm) {
-            message.push('password donot match')
-            return res.render('student_register',{message});
-        };
+//         if (results.length > 0 ){
+//             message.push('Email already used')
+//             return res.render('student_register',{message});
+//         } 
+//         else if(password !== passwordConfirm) {
+//             message.push('password donot match')
+//             console.log("thisIs" + message)
+//             return res.render('student_register',{message});
+//         }
 
         
-        if(!errors.isEmpty()) {
-            // return res.status(422).jsonp(errors.array())
-            const alert = errors.array()
-            res.render('student_register', {alert})
-        }
-        else{
-            let hashedPassword = await hashit(password);//bcrypt.hash(password, 8); //8 round to incript pw
+//         // if(!errors.isEmpty()) {
+//         //     // return res.status(422).jsonp(errors.array())
+//         //     const alert = errors.array()
+//         //     res.render('student_register', {alert})
+//         // }
+//         else{
+//             let hashedPassword = await hashit(password);//bcrypt.hash(password, 8); //8 round to incript pw
 
-            db.query('INSERT INTO student SET ?',{username: username,firstname: firstname, lastname: lastname, email: email, passwords: hashedPassword }, (error, results)=>{
-                if(error){
-                    console.log(error);
-                }
-                else{
-                    message.push('User Registered')
-                    return res.render('student_login',{message});
-                }
-            })
-        }        
+//             db.query('INSERT INTO student SET ?',{username: username,firstname: firstname, lastname: lastname, email: email, passwords: hashedPassword }, (error, results)=>{
+//                 if(error){
+//                     console.log(error);
+//                 }
+//                 else{
+//                     message.push('User Registered')
+//                     console.log("this" + message)
+//                     return res.render('student_login',{message});
+//                 }
+//             })
+//         }        
         
-    });
+//     });
     
 
-    // res.redirect('/');
-}
+//     // res.redirect('/');
+// }
+
+
+
+exports.student_register = (req, res) => {
+    const message = [];
+     // Declare message as an array
+    console.log(req.body);
+  
+    const { username, firstname, lastname, email, password, passwordConfirm } = req.body;
+    
+  
+    const errors = validationResult(req);
+  
+    db.query('SELECT username FROM student WHERE username = ?', [username], async (error, results) => {
+      if (error) {
+        console.log(error);
+      }
+  
+      if (results.length > 0) {
+        message.push('Username already used');
+        return res.render('student_register', { message: message }); // Pass message to the template
+      } else if (password !== passwordConfirm) {
+        message.push('Passwords do not match');
+        console.log("thisIs", message);
+        return res.render('student_register', { message: message }); // Pass message to the template
+      }
+  
+      // If there are validation errors, you can also pass them to the template
+      if (!errors.isEmpty()) {
+        const alert = errors.array();
+        return res.render('student_register', { message: message, alert: alert }); // Pass message and alert to the template
+      }
+  
+      
+      let hashedPassword = await hashit(password);//bcrypt.hash(password, 8); //8 round to incript pw
+      db.query('INSERT INTO student SET ?', { username: username, firstname: firstname, lastname: lastname, email: email, passwords: hashedPassword }, (error, results) => {
+        if (error) {
+          console.log(error);
+        } else {
+          message.push('User Registered');
+          console.log("this", message);
+          return res.render('student_login', { message: message }); // Pass message to the template
+        }
+      });
+    });
+  };
 
 // <% if(message) { %>
 //     <div class="alert alert-danger" role="alert"><%= message %></div>
@@ -114,6 +162,7 @@ exports.student_register = (req,res)=> {
 
 
 exports.login_student = (req, res)=>{
+    const mess = []
     const {username, password } = req.body;
     (
         async function(){
@@ -123,7 +172,8 @@ exports.login_student = (req, res)=>{
                 db.query('SELECT * FROM student WHERE username = ?',[username], async (error, results)=>{
                     formula = results[0]
                     if(error){
-                        console.log(error);
+                        mess.push("Username not found")
+                        console.log("thisIsThe" + error);
                     }
                     console.log('results',results,results.length);
 
@@ -141,12 +191,14 @@ exports.login_student = (req, res)=>{
                                 return res.redirect('/')
                             }
                             else{
-                                return res.render('student_login')
+                                mess.push("Password donot match")
+                                return res.render('student_login', {mess:mess})
                             }
                             
                         })
                     }else{
-                        return res.render('student_login')
+                        mess.push("username not found")
+                        return res.render('student_login', { mess:mess })
                   }
                         // if(results.password == hashedPassword){
                         //     //req.session.username = results.username
@@ -188,7 +240,7 @@ for guide
 */
 
 exports.tutor_register = (req,res)=> {
-    const {username, firstname,lastname, middlename, grpGender, email, password, passwordConfirm, address, contactNumber, tutorPicture, subject, bio, educationLevel, collegegrade, collegegradesheet, citizenshipName, citizenshipNumber, licenseName, licenseNumber } = req.body;
+    const {username, firstname,lastname, middlename, grpGender, email, password, passwordConfirm, address, contactNumber, tutorPicture, subject, bio, educationLevel, collegegrade, collegegradesheet, citizenshipName, citizenshipNumber, licenseName, licenseNumber, availability, monthlyFee, experience } = req.body;
     var message = [];
     const errors = validationResult(req)
     //one person with one email can register one time & if passsword and passwordConfirm matches
@@ -215,7 +267,7 @@ exports.tutor_register = (req,res)=> {
         else{
             let hashedPassword = await hashit(password); //bcrypt.hash(password, 8);  //8 round to incript pw
 
-            db.query('INSERT INTO tutor SET ?',{username: username,firstname: firstname, lastname: lastname, middlename:middlename, grpGender:grpGender, email: email, passwords: hashedPassword, address: address, contactNumber:contactNumber, tutorPicture:tutorPicture, subject:subject, bio:bio,educationLevel:educationLevel, collegegrade:collegegrade, collegegradesheet:collegegradesheet,citizenshipName:citizenshipName, citizenshipNumber:citizenshipNumber, licenseName:licenseName, licenseNumber:licenseNumber }, (error, results)=>{
+            db.query('INSERT INTO tutor SET ?',{username: username,firstname: firstname, lastname: lastname, middlename:middlename, grpGender:grpGender, email: email, passwords: hashedPassword, address: address, contactNumber:contactNumber, tutorPicture:tutorPicture, subject:subject, bio:bio,educationLevel:educationLevel, collegegrade:collegegrade, collegegradesheet:collegegradesheet,citizenshipName:citizenshipName, citizenshipNumber:citizenshipNumber, licenseName:licenseName, licenseNumber:licenseNumber, availability:availability, monthlyFee:monthlyFee, experience:experience }, (error, results)=>{
                 // db.query('INSERT INTO tutor_subject SET ?', {subject: subject}, (subject, error1)=>{
                     if(error){
                         console.log(error);
@@ -266,6 +318,7 @@ exports.tutor_register = (req,res)=> {
             
 
 exports.tutor_login = (req, res)=>{
+    msg = []
     const {username, password } = req.body;
     (
         async function(){
@@ -311,15 +364,16 @@ exports.tutor_login = (req, res)=>{
                                     return res.redirect('/')
                                 }
                                 else{
+                                    msg.push("Password donot match")
                                     console.log("ERROR-1")
-                                    return res.render('tutor_login')
+                                    return res.render('tutor_login', {msg: msg})
                                 }
                                 
                             })
                         }else{
-                            console.log("ERROR-2")
-                        return res.render('tutor_login')
-                  }
+                            msg.push("Username not found")
+                            return res.render('tutor_login', {msg:msg})
+                         }
                         // if(results.password == hashedPassword){
                         //     //req.session.username = results.username
                         //     return res.render('index',)

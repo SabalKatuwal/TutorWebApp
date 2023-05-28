@@ -5,6 +5,7 @@ const {check, validationResult} = require('express-validator')
 
 const authController = require('../controllers/auth'); //to go one directory back and go to controller/auth.js
 const { render } = require('express/lib/response');
+const upload = require('../server')
 
 
 //intermediate routes for login and register
@@ -77,7 +78,7 @@ router.get('/tutor_register', (req, res)=>{
     res.redirect('/')
 });
 
-router.post('/tutor_register',
+router.post('/tutor_register', //upload.single("tutorPicture"),
 // [
 //     check('citizenshipNumber', 'Invalid citizenship number')
 //         .exists()

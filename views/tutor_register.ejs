@@ -1,6 +1,7 @@
 <%- include("header") -%>
 <!-- register for teacher -->
 
+
 <div class="container">
     <div class="py-5 text-center">
         
@@ -99,14 +100,38 @@
             
                 <div class="mb-3">
                     <label for="picture">Upload your Picture:</label>
-                    <input type="file" class="img-upload-btn" id="picture" name="tutorPicture">
+                    <input type="file" class="img-upload-btn" id="picture" name="tutorPicture" accept="image/*">
                 </div>
             
                 <div class="mb-3">
-                    <label for="address">Subject</label>
+                    <label for="address">Subjects</label>
                     <input type="text" class="form-control" id="address" placeholder="Please enter your subject expertise (Seperate each subject with comma (,)" name="subject" required>
                     <div class="invalid-feedback">
                         Please enter your subject expertise (Seperate each subject with comma ',').
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="address">Teaching Experience</label>
+                    <input type="text" class="form-control" id="address" name="experience" placeholder="How long have you been a teacher?" name="subject" required>
+                    <div class="invalid-feedback">
+                        How long have you been a teacher?
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="address">Monthly Fee</label>
+                    <input type="text" class="form-control" id="address" name="monthlyFee" placeholder="How much do you charge a month?" name="subject" required>
+                    <div class="invalid-feedback">
+                        How much do you charge a month?
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="address">Availability</label>
+                    <input type="text" class="form-control" name="availability" id="address" placeholder="Please enter your teaching schedule(days) details. Eg: Sunday-Friday" name="subject" required>
+                    <div class="invalid-feedback">
+                        Please enter your teaching hour details.
                     </div>
                 </div>
 

@@ -6,10 +6,6 @@
         <div class="col-md-4">
             <div class="profile-img">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                <div class="file btn btn-lg btn-primary">
-                    Change Photo
-                    <input type="file" name="file"/>
-                </div>
             </div>
         </div>
         <div class="col-md-6">
@@ -63,6 +59,7 @@
                                     <p><%= tutor.firstname %></p>
                                 </div>
                             </div>
+                            <% if (isLoggedIn) { %>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Email</label>
@@ -80,13 +77,14 @@
                                     <p><%= tutor.contactNumber %></p>
                                 </div>
                             </div>
+                            <% } %>
 
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Experience</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>Expert</p>
+                                    <p><%= tutor.experience %></p>
                                 </div>
                             </div>
                             <div class="row">
@@ -94,32 +92,16 @@
                                     <label>Monthly Fees</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>10$</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Total Teaching Hours</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>230</p>
+                                    <p>Rs. <%= tutor.monthlyFee %></p>
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>English Level</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Expert</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
                                     <label>Availability</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>6 months</p>
+                                    <p><%= tutor.availability %></p>
                                 </div>
                             </div>
                             <div class="row">
@@ -127,7 +109,7 @@
                                     <label>About Me</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <p style="text-align: justify;">Hello, I am a highly experienced and skilled mathematics teacher with a passion for educating students of all ages. With 10 years of teaching experience under their belt, I have had honed my ability to create engaging lesson plans and foster a positive learning environment in the classroom. I possess a deep understanding of mathematical concepts and are dedicated to helping my students develop a strong foundation in mathematics, regardless of their current skill level. I am known for my patient, supportive teaching style and my ability to help students overcome their challenges in math. My expertise in the field of mathematics and my commitment to student success has made me a highly respected educator in the community.</p>
+                                    <p><%= tutor.bio %></p>
                                 </div>
                             </div>
                 </div>

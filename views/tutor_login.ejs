@@ -1,7 +1,18 @@
 
 
 <%- include("header") -%>
-
+<% if(typeof msg != 'undefined') { %>
+    <% if (msg && msg.length > 0) { %>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <% msg.forEach((mess) => { %>
+            <p><%= mess %></p>
+          <% }) %>
+        </div>
+      <% } %>
+      <% } %>
 <div class="container login-container">
     <div class="row">
         <div class="col-md-6 login-form-1">

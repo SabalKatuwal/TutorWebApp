@@ -189,21 +189,19 @@ exports.contact_us = (req,res)=> {
 exports.search_result = (req,res)=> {
     const {body} = req.body
     console.log(req.body)
-    db.query("SELECT * FROM tutor WHERE username LIKE '%"+ body + "%'",(error, result)=>{
+    db.query(
+        "SELECT * FROM tutor WHERE username LIKE '%" + body + "%' OR subject LIKE '%" + body + "%'",
+        (error, result) => {
         if(error){
             console.log(error)
         }
         else{
             
-            console.log("hello" + result[0].id)
+            
             db.query("SELECT * FROM tutor where id = ?",[result[0].id],(error, id)=>{
                 console.log(id[0])
                 res.render("search_result", {tutor:result,id:id[0]});
-                // if (id[0]) {
-                //     res.render("search_result", {tutor:result,id:id[0]});
-                // }else{
-                //     console.log("usernotfound")
-                // }
+
                 
             })
         }

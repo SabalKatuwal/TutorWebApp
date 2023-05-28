@@ -1,30 +1,22 @@
 
-<% if(typeof message != 'undefined') { %>
-    <% message.forEach(function(error) { %>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <%= message.msg %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-    <% }) %>
-<% } %>
-
-
 
 
 <%- include("header") -%>
 
-<% if(typeof alert != 'undefined') { %>
-    <% alert.forEach(function(error) { %>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <%= error.msg %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-    <% }) %>
-<% } %>
+
+<% if(typeof message != 'undefined') { %>
+    <% if (message && message.length > 0) { %>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <% message.forEach((msg) => { %>
+            <p><%= msg %></p>
+          <% }) %>
+        </div>
+      <% } %>
+      <% } %>
+
 
 <div class="container">
     <div class="py-5 text-center">
