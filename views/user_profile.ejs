@@ -62,6 +62,33 @@
                                         <p><%= session.email %></p>
                                     </div>
                                 </div>
+                                <% if (result.length > 0) { %>
+                                    <ul>
+                                      <% result.forEach((item) => { %>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Paid tutor Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><%= item.tutorName %></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Paid Amount</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><%= item.paymentAmount %></p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                      <% }) %>
+                                    </ul>
+                                  <% } else { %>
+                                    <hr>
+                                    <p>No payment records found for Tutor.</p>
+                                  <% } %>
                                 
                     </div>
                     

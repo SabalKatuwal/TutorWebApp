@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const {check, validationResult} = require('express-validator');
 const e = require('express');
+// const { default: Stripe } = require('stripe');
 
 
 const db = mysql.createConnection({
@@ -79,18 +80,22 @@ exports.index = (req,res)=> {
     return res.render('index', {user:req.session.userinfo})
 };
 
+//payment
+const PUBLISHABLE_KEY = "pk_test_51NCh4OCPNV6NgccbKNjmqXjsvVVuobZ4ShmA31ELK3szw5mzCfjX9cy3rL8o241830wE1WRwfUhP2hdOErakh7WQ00r9G1Qwqa"
+const SECRET_KEY = "sk_test_51NCh4OCPNV6NgccbobXnGEF7JQTvB3492cxUQhFlGgwaJMGJTZDCjkocw2s65aRxfJ3GplppOa4y533wqlyVgM0200l01KdVa2"
+const stripe = require('stripe')(SECRET_KEY)
 
 exports.detail_view = (req,res)=> {
     const id = req.params.id
-    console.log('req.params',req.params)
     db.query("select * from tutor where id = ?", [id],(error, tutor)=>{
         if(error){
             console.log(error)
         }
         else{
-            console.log('tutor',tutor)
+            
             return res.render('tutor_detail', {
                 tutor:tutor[0], 
+                key:PUBLISHABLE_KEY 
                 // accomodations, 
                 // guide:guide[0],
                 // user:user[0],
@@ -201,7 +206,7 @@ exports.search_result = (req,res)=> {
             if (result.length > 0){
                 db.query("SELECT * FROM tutor where id = ?",[result[0].id],(error, id)=>{
                     console.log(id[0])
-                    res.render("search_result", {tutor:result,id:id[0]});
+                    res.render("search_result", {tutor:result,id:id[0], noResults: false});
     
                     
                 });
@@ -214,5 +219,59 @@ exports.search_result = (req,res)=> {
             
         }
         
+    })
+}
+
+
+exports.payment = (req, res) => {
+    
+    const { stripeEmail, stripeToken } = req.body;
+    const username = req.session.userinfo.username;
+    const studentId = req.session.userinfo.id;
+    const tutorId = req.params.tutorId;
+    console.log(tutorId)
+    stripe.customers.create({
+        email:req.body.stripeEmail,
+        source: req.body.stripeToken,
+        name: req.session.userinfo.username,
+        address:{
+            line1: 'addresshere',
+            postal_code: '123',
+            city: 'KTM',
+            state: 'Bagmati',
+            country: 'Nepal'
+        }
+    })
+    .then((customer)=> {
+        return stripe.charges.create({
+            amount:1000,
+            description:'Web site tutor fees ',
+            currency:'USD',
+            customer:customer.id
+        })
+    })
+    .then((charge)=>{
+        console.log(charge)
+        const amount = charge.amount;
+        const method = charge.payment_method_details.card.brand
+        console.log("amount" + amount)
+        console.log("method" + method)
+        db.query(
+            'INSERT INTO payments (tutorId, studentId, paymentBy, email, payment_info, amount, method) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [tutorId, studentId, username, stripeEmail, JSON.stringify(charge), amount, method],
+            (error, result) => {
+              if (error) {
+
+                console.log(error);
+                res.send(error);
+              } else {
+                console.log('Payment data inserted successfully');
+                res.redirect('/');
+              }
+            }
+          );
+    })
+    .catch((err) => {
+        res.send(err)
     })
 }

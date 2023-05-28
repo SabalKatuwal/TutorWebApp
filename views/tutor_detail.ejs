@@ -8,21 +8,37 @@
                 <img src="/uploads/<%= tutor.tutorPicture %>" alt="profile-pic"/>
             </div>
         </div>
+
+
+        <!-- move this button -->
+        <!-- <a href="/payment">  <button type="button" class="btn btn-info btn-sm">Hire Tutor</button></a> -->
+        <!-- <form action="/payment/<%= tutor.id %>" method="POST">
+            <script src="//checkout.stripe.com/v2/checkout.js"
+                    class="stripe-button"
+                    data-key="<%= key %>"
+                    data-amount="1000"
+                    data-currency="usd"
+                    data-name="Make payment for tutor"
+                    data-description="your payment will be intermediated"
+                    data-Locale="auto">
+            </script>
+        </form> -->
+
+
         <div class="col-md-6">
             <div class="profile-head">
                         <h5>
                             <%= tutor.username %>
                         </h5>
                         
-                        <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                        <div class="col-md-2">
+                        <p class="proile-rating">Ratings: 
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star-half-stroke"></i>
-                            <span>(4.5/5)</span>
-                        </div>
+                            <span>(4.5/5)</span> 
+                        </p>
                     
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
@@ -33,8 +49,21 @@
             </div>
         </div>
 
-            
-        
+        <% if (isLoggedIn && !isLoggedIn.isTutor) { %>
+        <div class="col-md-2">
+            <form action="/payment/<%= tutor.id %>" method="POST">
+                <script src="//checkout.stripe.com/v2/checkout.js"
+                        class="stripe-button"
+                        data-key="<%= key %>"
+                        data-amount="1000"
+                        data-currency="usd"
+                        data-name="Make payment for tutor"
+                        data-description="your payment will be intermediated"
+                        data-Locale="auto">
+                </script>
+            </form>
+        </div>
+        <% } %>
         
     </div>
     <div class="row my-2">
@@ -87,6 +116,14 @@
                                 </div>
                                 <div class="col-md-6">
                                     <p><%= tutor.experience %></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Subject Expertise</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><%= tutor.subject.split(',').join(', ') %></p>
                                 </div>
                             </div>
                             <div class="row">

@@ -8,6 +8,9 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session)     //overwrite dot method
 //var cookieParser = require('cookie-parser')
 
+// //stripe payment
+// const PRIVATE_KEY = "pk_test_51NCh4OCPNV6NgccbKNjmqXjsvVVuobZ4ShmA31ELK3szw5mzCfjX9cy3rL8o241830wE1WRwfUhP2hdOErakh7WQ00r9G1Qwqa"
+// const SECRET_KEY = "sk_test_51NCh4OCPNV6NgccbobXnGEF7JQTvB3492cxUQhFlGgwaJMGJTZDCjkocw2s65aRxfJ3GplppOa4y533wqlyVgM0200l01KdVa2"
 
 
 // app.use(bodyParser.json());

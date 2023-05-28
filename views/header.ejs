@@ -88,12 +88,12 @@
         <ul class="nav-links" style="width: 0;">
             <% if (isLoggedIn.isTutor) { %>
                 <li>
-                    <a href="/auth/profile"><img src="/uploads/<%= isLoggedIn.tutorPicture %>" style="border: 1px solid paleturquoise; width: 40px; height: 30px; display: inline-block; text-align: center; border-radius: 50%; font-size: 1.2rem;"></a>
+                    <a href="/auth/profile"><img src="/uploads/<%= isLoggedIn.tutorPicture %>" style="border: 2px solid paleturquoise; width: 40px; height: 30px; display: inline-block; text-align: center; border-radius: 50%; font-size: 1.2rem;"></a>
                   </li>
             <% } %>   
             <% if (!isLoggedIn.isTutor) { %> 
             <li>
-                <a href="/auth/profile"><img src="/uploads/<%= isLoggedIn.studentPicture %>" style="border: 1px solid paleturquoise; width: 40px; height: 30px; display: inline-block; text-align: center; border-radius: 50%; font-size: 1.2rem;"></a>
+                <a href="/auth/profile"><img src="/uploads/<%= isLoggedIn.studentPicture %>" style="border: 2px solid paleturquoise; width: 40px; height: 30px; display: inline-block; text-align: center; border-radius: 50%; font-size: 1.2rem;"></a>
               </li>
             <% } %> 
             <!-- <li><a href="/auth/profile" style="border: 1px solid paleturquoise; width: 40px; height: 30px; display: inline-block; text-align: center; border-radius: 50%; font-size: 1.2rem;">P</a></li> -->

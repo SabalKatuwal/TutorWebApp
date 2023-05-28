@@ -119,7 +119,7 @@ exports.student_register = (req, res) => {
 
     const studentPicture = req.file.filename;
   
-    const { username, firstname, lastname, email, password, passwordConfirm } = req.body;
+    const { username, firstname, lastname, email, password, passwordConfirm, district } = req.body;
     
   
     const errors = validationResult(req);
@@ -146,7 +146,7 @@ exports.student_register = (req, res) => {
   
       
       let hashedPassword = await hashit(password);//bcrypt.hash(password, 8); //8 round to incript pw
-      db.query('INSERT INTO student SET ?', { username: username, firstname: firstname, lastname: lastname, email: email, passwords: hashedPassword, studentPicture:studentPicture }, (error, results) => {
+      db.query('INSERT INTO student SET ?', { username: username, firstname: firstname, lastname: lastname, email: email, passwords: hashedPassword, studentPicture:studentPicture, district:district }, (error, results) => {
         if (error) {
           console.log(error);
         } else {
@@ -244,7 +244,7 @@ for guide
 exports.tutor_register = (req,res)=> {
     const tutorPicture = req.file.filename;
     // console.log("picture" + tutorPicture)
-    const {username, firstname,lastname, middlename, grpGender, email, password, passwordConfirm, address, contactNumber, subject, bio, educationLevel, collegegrade, collegegradesheet, citizenshipName, citizenshipNumber, licenseName, licenseNumber, availability, monthlyFee, experience } = req.body;
+    const {username, firstname,lastname, middlename, grpGender, email, password, passwordConfirm, address, contactNumber, subject, bio, educationLevel, collegegrade, collegegradesheet, citizenshipName, citizenshipNumber, licenseName, licenseNumber, availability, monthlyFee, experience, district } = req.body;
     var message = [];
     const errors = validationResult(req)
     //one person with one email can register one time & if passsword and passwordConfirm matches
@@ -271,13 +271,12 @@ exports.tutor_register = (req,res)=> {
         else{
             let hashedPassword = await hashit(password); //bcrypt.hash(password, 8);  //8 round to incript pw
 
-            db.query('INSERT INTO tutor SET ?',{username: username,firstname: firstname, lastname: lastname, middlename:middlename, grpGender:grpGender, email: email, passwords: hashedPassword, address: address, contactNumber:contactNumber, tutorPicture:tutorPicture, subject:subject, bio:bio,educationLevel:educationLevel, collegegrade:collegegrade, collegegradesheet:collegegradesheet,citizenshipName:citizenshipName, citizenshipNumber:citizenshipNumber, licenseName:licenseName, licenseNumber:licenseNumber, availability:availability, monthlyFee:monthlyFee, experience:experience }, (error, results)=>{
+            db.query('INSERT INTO tutor SET ?',{username: username,firstname: firstname, lastname: lastname, middlename:middlename, grpGender:grpGender, email: email, passwords: hashedPassword, address: address, contactNumber:contactNumber, tutorPicture:tutorPicture, subject:subject, bio:bio,educationLevel:educationLevel, collegegrade:collegegrade, collegegradesheet:collegegradesheet,citizenshipName:citizenshipName, citizenshipNumber:citizenshipNumber, licenseName:licenseName, licenseNumber:licenseNumber, availability:availability, monthlyFee:monthlyFee, experience:experience, district:district }, (error, results)=>{
                 // db.query('INSERT INTO tutor_subject SET ?', {subject: subject}, (subject, error1)=>{
                     if(error){
                         console.log(error);
                     }
                     else{
-                        console.log("HereisHero")
                         message.push('Tutor Registered')
                         return res.render('tutor_login',{message});
                         // return res.redirect('/tutor_login');
@@ -407,8 +406,26 @@ exports.profile = (req,res)=> {
             })
         }
         else{
+            //show teacher who has been paid and amount 
+            const studentId = req.session.userinfo.id;
+            db.query(
+                `SELECT tutor.username AS tutorName, payments.amount AS paymentAmount
+                FROM payments
+                JOIN tutor ON payments.tutorId = tutor.id
+                WHERE payments.studentId = ?`,
+                [studentId],
+            (error, result) => {
+                if (error) {
+                    console.log(error);
+                    res.send(error);
+                } else {
+                    console.log(result);
+                    return res.render('user_profile',{session:req.session.userinfo, result:result})
+                }
+            }
+            );
+
             
-            return res.render('user_profile',{session:req.session.userinfo})
         }
     }
     else{
