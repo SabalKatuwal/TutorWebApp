@@ -63,6 +63,7 @@ router.post('/place_upload',upload.array('picture',12),pageController.place_uplo
 
 router.post('/contact_us', pageController.contact_us);
 
+router.get('/nearby', pageController.nearby);  //id is tutor ko id
 
 
 

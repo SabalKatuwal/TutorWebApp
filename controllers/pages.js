@@ -223,6 +223,43 @@ exports.search_result = (req,res)=> {
 }
 
 
+exports.nearby = (req,res)=> {
+    // const {body} = req.body
+    // console.log(req.body)
+    db.query(
+        
+
+
+        `SELECT tutor.* 
+        FROM tutor
+        JOIN student ON tutor.district = student.district
+        WHERE student.id = ?`,
+        [req.session.userinfo.id],
+        (error, result) => {
+            if(error){
+                console.log(error)
+            }
+            else{
+    
+                if (result.length > 0){
+                    db.query("SELECT * FROM tutor where id = ?",[result[0].id],(error, id)=>{
+                        console.log(id[0])
+                        res.render("search_result", {tutor:result,id:id[0], noResults: false});
+        
+                        
+                    });
+                } else {
+                    //no result found
+                    res.render("search_result", { tutor: [], id: null, noResults: true });
+                }
+                
+                
+                
+            }
+        }
+      );
+}
+
 exports.payment = (req, res) => {
     
     const { stripeEmail, stripeToken } = req.body;
